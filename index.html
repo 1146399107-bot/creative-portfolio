@@ -53,7 +53,8 @@
     .cell{width:var(--reel-card)!important;flex:0 0 var(--reel-card)}
     @media(max-width:760px){.viewport{scroll-padding-inline:7vw}.strip{--reel-card:86vw;padding-inline:7vw!important;gap:12px}}
     /* Stability pass: preserve the film language without full-page repaint loops. */
-    .frame-transition{display:none!important}
+    .frame-transition{display:block!important;visibility:hidden;opacity:0;transition:none!important}
+    .frame-transition.active{visibility:visible}
     .scroll-video-bg:before{display:none!important}
     .scroll-video-bg video{filter:saturate(.98) contrast(1.02) brightness(1.07)!important}
     .works,.about,.contact{clip-path:none!important;transition:none!important;content-visibility:visible!important}
@@ -110,8 +111,9 @@
     function setNav(open){navOverlay.classList.toggle('open',open);navOverlay.setAttribute('aria-hidden',String(!open));menuToggle.setAttribute('aria-expanded',String(open));document.body.classList.toggle('nav-open',open);if(open)navClose.focus()}
     menuToggle.onclick=()=>setNav(true);navClose.onclick=()=>setNav(false);navOverlay.querySelectorAll('a').forEach(link=>link.onclick=()=>setNav(false));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&navOverlay.classList.contains('open'))setNav(false)});
 
-    let frameStartRect=null,effectsTick=false,lastScrollY=scrollY,lastScrollT=performance.now(),velocity=0,velocityFade=0;
-    function updateFrameTransition(){frameTransition.classList.remove('active');frameTransition.style.opacity='0';heroFilm.style.opacity=''}
+    let frameStartRect=null,frameVideoActive=false,lastFrameScrollY=scrollY,effectsTick=false,lastScrollY=scrollY,lastScrollT=performance.now(),velocity=0,velocityFade=0;
+    function stopFrameTransition(){frameTransition.classList.remove('active');frameTransition.style.opacity='0';heroFilm.style.opacity='';if(frameVideoActive){frameTransitionVideo.pause();frameVideoActive=false}}
+    function updateFrameTransition(){const worksTop=worksSection.offsetTop,start=hero.offsetTop+innerHeight*.38,fullAt=worksTop-innerHeight*.2,goingDown=scrollY>=lastFrameScrollY-2;lastFrameScrollY=scrollY;if(reducedMotion||scrollY<=start||scrollY>=worksTop||(!goingDown&&!frameStartRect)){stopFrameTransition();if(scrollY<=start||scrollY>=worksTop)frameStartRect=null;return}if(!frameStartRect){const r=heroFilm.getBoundingClientRect();frameStartRect={left:r.left,top:r.top,width:r.width,height:r.height}}const expand=clamp01((scrollY-start)/Math.max(fullAt-start,1)),fade=clamp01((scrollY-fullAt)/Math.max(worksTop-fullAt,1)),ease=expand*expand*(3-2*expand),r=frameStartRect,sx=r.width/innerWidth,sy=r.height/innerHeight,x=r.left+r.width/2-innerWidth/2,y=r.top+r.height/2-innerHeight/2,enterAlpha=clamp01(expand*6),alpha=enterAlpha*(1-fade);if(!frameVideoActive){frameVideoActive=true;frameTransitionVideo.preload='auto';if(heroLoop.readyState>0&&frameTransitionVideo.readyState>0)try{frameTransitionVideo.currentTime=heroLoop.currentTime}catch(_){}frameTransitionVideo.play().catch(()=>{})}frameTransition.classList.add('active');frameTransition.style.opacity=alpha.toFixed(3);frameTransition.style.transform='translate3d('+(x*(1-ease))+'px,'+(y*(1-ease))+'px,0) scale('+(sx+(1-sx)*ease)+','+(sy+(1-sy)*ease)+') rotate('+(-3*(1-ease))+'deg)';frameTransition.style.borderRadius=((1-ease)*10)+'px';heroFilm.style.opacity=String(1-enterAlpha)}
     function updateSectionMasks(){sectionScenes.forEach(section=>{const r=section.getBoundingClientRect(),reveal=reducedMotion?1:clamp01((innerHeight*.98-r.top)/(innerHeight*.45));section.style.setProperty('--section-reveal',reveal.toFixed(3))})}
     function updateEffects(){updateFrameTransition();updateSectionMasks();effectsTick=false}
     function requestEffects(){if(!effectsTick){effectsTick=true;requestAnimationFrame(updateEffects)}}
