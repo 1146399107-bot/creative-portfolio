@@ -85,11 +85,107 @@
       .cell .image{transform:none!important}
     }
   </style>
+  <style>
+    body.cover-active{overflow:hidden}.identity-cover[hidden]{display:none}.identity-cover{position:fixed;z-index:116;inset:0;overflow:hidden;background:#ebe3d4;opacity:0;transition:opacity .55s ease;cursor:default}.identity-cover.show{opacity:1}.identity-cover.leaving{opacity:0;pointer-events:none}.identity-cover picture,.identity-cover img{width:100%;height:100%;display:block}.identity-cover img{object-fit:cover}.identity-cover-hint{position:absolute;right:20px;bottom:18px;padding:7px 10px;background:#f3ecdfb8;color:#173b5d;font-size:9px;font-weight:700;letter-spacing:.14em;backdrop-filter:blur(8px)}
+    @media(max-width:760px){.identity-cover img{object-fit:contain}.identity-cover-hint{right:12px;bottom:calc(12px + env(safe-area-inset-bottom))}}
+    @media(prefers-reduced-motion:reduce){.identity-cover{transition:none}}
+  </style>
+  <style>
+    /* Shader-inspired editorial rebuild: one claim, one reel, one story. */
+    .hero{min-height:100svh;padding:118px 3vw 34px;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);grid-template-rows:auto 1fr auto;column-gap:5vw;row-gap:22px;align-items:center;background:#0b0c0b;color:#f3f0e8}
+    .hero>.eyebrow{grid-column:1;grid-row:1;align-self:end;margin:0;color:#d8ff38}
+    .hero h1{grid-column:1;grid-row:2;width:auto;margin:0;position:relative;z-index:2;font-size:clamp(76px,9.2vw,164px);line-height:.78;letter-spacing:-.075em}
+    .hero h1 em{font-weight:300}
+    .heroframe{grid-column:2;grid-row:1/3;position:relative;inset:auto;width:min(100%,720px);height:auto;aspect-ratio:16/10;justify-self:end;align-self:center;transform:rotate(-3deg);transform-origin:center;z-index:1}
+    .herofoot{grid-column:1/-1;grid-row:3;width:100%;margin:0;padding-top:24px;border-top:1px solid #ffffff2e}
+    .herofoot p{max-width:520px;color:#c8c8c2}
+
+    .works{background:#e9e4d8!important;color:#111!important;padding:92px 0 112px}
+    .works .head{margin:0 3vw;border-color:#111827;color:#111}
+    .works .head span{color:#6f6b62}
+    .worktitle{padding:64px 3vw 52px;display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,390px);gap:6vw;align-items:end}
+    .worktitle h2{font-size:clamp(74px,9.6vw,158px);line-height:.74;letter-spacing:-.075em;color:#111}
+    .worktitle h2 em{-webkit-text-stroke:1px #111;color:transparent}
+    .worktitle>div{padding-bottom:8px}
+    .worktitle p{color:#56534d;font-size:14px;line-height:1.8}
+    .worktitle .source{color:#111;border-color:#111}
+    .filters{margin:0 3vw 24px}
+    .filters button{color:#111;border-color:#1114;background:transparent}
+    .filters button.active,.filters button:hover{color:#e9e4d8;background:#111;border-color:#111}
+    .reel{margin:0 3vw;border:1px solid #111;border-radius:0;box-shadow:0 28px 80px #5d51262e;background:#b49b58}
+
+    .about{background:#0b0c0b!important;color:#f3f0e8!important;padding:96px 3vw 118px}
+    .about .head{margin:0;border-color:#ffffff2e}
+    .aboutgrid{margin:0;padding:76px 0 92px;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);column-gap:7vw;row-gap:70px}
+    .aboutgrid h2{font-size:clamp(58px,7.2vw,122px);line-height:.88;letter-spacing:-.065em}
+    .aboutgrid .bio{align-self:end;color:#aaa}
+    .services{grid-column:1/-1;padding:0;border:0;background:transparent;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+    .services>small{grid-column:1/-1;margin-bottom:18px;color:#d8ff38;letter-spacing:.15em}
+    .services>div{min-height:112px;padding:18px 16px 14px 0;border-top:1px solid #ffffff25;border-right:1px solid #ffffff1c;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start}
+    .services>div span{color:#777}
+    .service-marquee{margin-inline:-3vw;border-color:#ffffff24}
+
+    .contact{min-height:86svh;padding:92px 3vw 34px;background:#d8ff38!important;color:#0b0c0b!important}
+    .contact:before{display:none!important}
+    .contact .eyebrow{color:#0b0c0b}
+    .contact>a{color:#0b0c0b;border-color:#0b0c0b}
+    .contactfoot{border-color:#0b0c0b55;color:#0b0c0b}
+
+    @media(max-width:760px){
+      .identity-cover img{object-fit:cover}
+      .hero{min-height:auto;padding:104px 18px 30px;display:flex;flex-direction:column;align-items:stretch;gap:0}
+      .hero>.eyebrow{order:1;margin-bottom:38px}
+      .hero h1{order:2;font-size:clamp(64px,21vw,92px);line-height:.8}
+      .heroframe{order:3;width:100%;margin:52px 0 46px;transform:rotate(-1.4deg)}
+      .herofoot{order:4;display:flex;align-items:flex-end;gap:18px}
+      .herofoot p{font-size:12px;line-height:1.75}
+      .works{padding:72px 0 80px}
+      .works .head,.filters,.reel{margin-left:18px;margin-right:18px}
+      .worktitle{padding:46px 18px 38px;display:block}
+      .worktitle h2{font-size:clamp(68px,23vw,102px);margin-bottom:38px}
+      .worktitle>div{max-width:330px}
+      .reel{border-radius:0}
+      .about{padding:72px 18px 88px}
+      .aboutgrid{display:block;padding:52px 0 66px}
+      .aboutgrid h2{font-size:clamp(48px,14vw,72px);margin-bottom:44px}
+      .aboutgrid .bio{margin-bottom:56px}
+      .services{padding:0;display:block}
+      .services>small{display:block;margin-bottom:16px}
+      .services>div{min-height:0;padding:18px 0;display:flex;flex-direction:row;align-items:center;border-right:0}
+      .service-marquee{margin-inline:-18px}
+      .contact{min-height:72svh;padding:72px 18px 28px}
+    }
+    /* Nomadic interaction layer: tactile entry and deliberate contact. */
+    .identity-cover:after{content:"";position:absolute;z-index:1;inset:45% 0 0;pointer-events:none;background:linear-gradient(180deg,transparent,#050505b8 72%,#050505e8)}
+    .identity-drag{--drag:0;--drag-x:0px;position:absolute;z-index:3;left:50%;bottom:clamp(24px,5vh,58px);width:min(560px,calc(100vw - 40px));padding:12px;border:1px solid #ffffff50;background:#090a09b8;color:#fff;backdrop-filter:blur(18px);cursor:grab;user-select:none;touch-action:none;transform:translateX(-50%)}
+    .identity-drag.dragging{cursor:grabbing}
+    .identity-drag-copy{display:flex;justify-content:space-between;margin:0 2px 11px;font-size:12px;letter-spacing:.12em}
+    .identity-drag-copy small{color:#ffffff8c;font-size:11px}
+    .identity-drag-track{position:relative;height:58px;overflow:hidden;border:1px solid #ffffff2c;background:#070807}
+    .identity-drag-track:before,.identity-drag-track:after{content:"";position:absolute;left:0;right:0;height:7px;background:radial-gradient(circle,#e9e4d8 0 2px,transparent 2.8px) 0 0/16px 7px repeat-x;opacity:.72}
+    .identity-drag-track:before{top:4px}.identity-drag-track:after{bottom:4px}
+    .identity-drag-progress{position:absolute;inset:0 auto 0 0;width:calc(var(--drag)*1%);background:linear-gradient(90deg,#d8ff3818,#d8ff3855)}
+    .identity-drag-thumb{position:absolute;z-index:2;left:6px;top:16px;width:86px;height:26px;display:grid;place-items:center;background:#d8ff38;color:#111;font-size:11px;font-weight:800;letter-spacing:.1em;transform:translateX(var(--drag-x));box-shadow:0 0 30px #d8ff3845}
+    .identity-drag:focus-visible{outline:2px solid #d8ff38;outline-offset:4px}
+    .identity-cover.leaving .identity-drag{opacity:0;transform:translate(-50%,18px);transition:.3s}
+    .contact-hold{--hold:0;position:relative;isolation:isolate;overflow:hidden;display:flex!important;flex-direction:column;align-items:flex-start;gap:14px;padding:.08em .04em .12em;touch-action:none;user-select:none}
+    .contact-hold:before{content:"";position:absolute;z-index:-1;inset:0 auto 0 0;width:calc(var(--hold)*1%);background:#99ba16;transition:width .08s linear}
+    .contact-hold>span{color:#0b0c0b}
+    .contact-hold>i{color:#0b0c0b;font:700 12px/1.4 Arial,"Microsoft YaHei",sans-serif;letter-spacing:.12em;font-style:normal}
+    .contact-hold.holding>i:before{content:"HOLDING · ";color:#d8ff38}
+    @media(max-width:760px){
+      .identity-drag{bottom:calc(18px + env(safe-area-inset-bottom));padding:9px;width:calc(100vw - 24px)}
+      .identity-drag-copy{font-size:11px}.identity-drag-copy small{font-size:10px}
+      .contact-hold{gap:10px}.contact-hold>i{font-size:11px}
+    }
+    @media(prefers-reduced-motion:reduce){.identity-drag-thumb{transition:none}.contact-hold:before{transition:none}}
+  </style>
 </head>
 <body class="gateway-active">
   <div class="scroll-video-bg" aria-hidden="true"><video id="scrollVideo" muted playsinline preload="metadata"><source media="(max-width:760px)" src="scroll-mobile.mp4" type="video/mp4"><source src="scroll-desktop.mp4" type="video/mp4"></video></div><div class="scroll-video-progress" aria-hidden="true"><i id="scrollVideoProgress"></i></div>
   <div class="frame-transition" id="frameTransition" aria-hidden="true"><video id="frameTransitionVideo" src="hero-loop.mp4" muted loop playsinline preload="none"></video></div>
   <section class="intro" id="introScreen" aria-label="秦漫作品集开场动画"><video id="introVideo" autoplay muted playsinline preload="auto"><source media="(max-width:760px)" src="intro-mobile.mp4" type="video/mp4"><source src="intro-desktop.mp4" type="video/mp4"></video><span class="intro-loading">LOADING OPENING FILM</span><div class="intro-bar"><span class="intro-brand">＊ 秦漫</span><button class="intro-skip" id="introSkip">跳过开场</button></div><span class="intro-label">AIGC / SHOWREEL INTRO</span><span class="intro-progress" aria-hidden="true"><i id="introProgress"></i></span></section>
+  <section class="identity-cover" id="identityCover" aria-label="秦漫 AIGC 作品集封面" hidden><picture><source media="(max-width:760px)" srcset="hero-bg-03.jpg"><img src="hero-bg-04.jpg" alt="秦漫 AIGC 作品集视觉封面" decoding="async" fetchpriority="high"></picture><div class="identity-drag" id="identityDrag" role="button" tabindex="0" aria-label="向右拖动胶片进入作品集"><div class="identity-drag-copy"><span>拖动胶片进入</span><small>DRAG TO DEVELOP →</small></div><div class="identity-drag-track" id="identityDragTrack"><i class="identity-drag-progress"></i><b class="identity-drag-thumb" id="identityDragThumb">35 MM →</b></div></div></section>
   <header class="top"><a class="brand" href="#home"><b>＊</b>秦漫</a><nav><a href="#works"><span>作品</span></a><a href="#about"><span>关于</span></a><a href="#contact"><span>联系</span></a></nav><button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navOverlay">菜单</button><a class="open" href="#contact"><i></i>可接受新项目</a></header>
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"><button class="nav-close" id="navClose" aria-label="关闭导航">×</button><nav aria-label="全屏导航"><a href="#home">首页</a><a href="#works">作品</a><a href="#about">关于</a><a href="#contact">联系</a></nav><small>QIN MAN / AIGC PORTFOLIO</small></div>
   <a class="persistent-cta" id="persistentCta" href="mailto:1146399107@qq.com"><span><small>START A PROJECT</small>一起聊聊</span><b>↗</b></a>
@@ -100,7 +196,7 @@
     <section class="hero" id="home"><div class="heroframe" id="heroFilm"><video id="heroLoop" src="hero-loop.mp4" muted loop playsinline preload="none"></video><span id="heroMode">REC / LOOP</span></div><p class="eyebrow">AIGC / 秦漫</p><h1 class="scroll-float"><span class="float-line"><span class="float-char">让</span><span class="float-char">每</span><span class="float-char">一</span><span class="float-char">帧</span></span><br><em class="float-line"><span class="float-char">拥</span><span class="float-char">有</span><span class="float-char">生</span><span class="float-char">命</span><span class="float-char">。</span></em></h1><div class="herofoot"><p>专注于品牌、数字体验与互动叙事，<br>在策略、视觉与技术之间创造令人记住的作品。</p><a class="down" href="#works">↓</a></div></section>
     <section class="works" id="works"><div class="head"><p><span>01</span>SELECTED WORK</p><p>14 FILMS / 10 GENRES</p></div><div class="worktitle"><h2>THE<br><em>REEL</em></h2><div><p>拖动胶卷浏览作品。点击画面将在飞书中打开原片，使用已登录的账号直接观看。</p><a class="source" target="_blank" rel="noreferrer" href="https://vcn2kkcx4mq9.feishu.cn/wiki/Y9yRwKrlWitLOvkXZXhcXowSn4d">全部原片 ↗</a></div></div><div class="filters"></div><div class="reel"><div class="reellabel"><span>QIN MAN MOTION ARCHIVE</span><span>35 MM — AIGC ORIGINALS</span></div><div class="viewport"><div class="strip"></div></div><div class="reelfoot"><p class="count"><b>01</b> / 14</p><div class="active"><small>品牌影像</small><strong>企业宣传</strong></div><div class="controls"><button class="prev" aria-label="上一部">←</button><button class="next" aria-label="下一部">→</button></div></div></div></section>
     <section class="about" id="about"><div class="head"><p><span>02</span>关于我</p><p>CREATIVE / AIGC</p></div><div class="aboutgrid" id="aboutPanel"><h2>以想象为底片，<br>用技术完成显影。</h2><div class="bio"><p>跨领域 AIGC 创作者，擅长把模糊的概念转化为清晰、有性格、能被感知的影像体验。从品牌系统到类型短剧，关心每一个镜头如何共同讲述完整的故事。</p><p>工作方式开放而务实：先找到真正的问题，再用恰到好处的技术与视觉语言，让复杂变得简单，让普通值得停留。</p></div><div class="services"><small>服务范围</small><div>AIGC 影像与视觉开发 <span>01</span></div><div>品牌策略与内容创意 <span>02</span></div><div>短剧、广告与 MV 制作 <span>03</span></div><div>视觉设计与艺术指导 <span>04</span></div></div></div><div class="service-marquee" aria-hidden="true"><div class="marquee-track"><span>AIGC FILM</span><b>●</b><span>BRAND STORY</span><b>●</b><span>SHORT DRAMA</span><b>●</b><span>MOTION DESIGN</span><b>●</b><span>ART DIRECTION</span><b>●</b><span>AIGC FILM</span><b>●</b><span>BRAND STORY</span><b>●</b><span>SHORT DRAMA</span><b>●</b><span>MOTION DESIGN</span><b>●</b><span>ART DIRECTION</span><b>●</b></div></div></section>
-    <section class="contact" id="contact"><p class="eyebrow">下一部作品，从这里开始。</p><a href="mailto:1146399107@qq.com">一起聊聊 ↗</a><div class="contactfoot"><span>1146399107@qq.com</span><span>© 2026 秦漫</span><span>抖音 · 小红书 · 微信</span></div></section>
+    <section class="contact" id="contact"><p class="eyebrow">下一部作品，从这里开始。</p><a class="contact-hold" id="contactHold" href="mailto:1146399107@qq.com" aria-label="按住一秒发送邮件给秦漫"><span>一起聊聊 ↗</span><i>按住 1 秒发送邮件 · 回车直接打开</i></a><div class="contactfoot"><span>1146399107@qq.com</span><span>© 2026 秦漫</span><span>抖音 · 小红书 · 微信</span></div></section>
   </main>
   <script>
     const base='https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/video',cover='https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/v2/cover';
@@ -119,8 +215,15 @@
     function openVideo(i){const v=shown[i],url=videoUrl(v);videoTitle.textContent=v[0]+' · '+v[1];videoSource.href=url;videoPlayer.src=url;videoModal.hidden=false;document.body.classList.add('modal-open');bgMusic.pause();videoPlayer.play().catch(()=>{});videoClose.focus()}
     function closeVideo(){videoPlayer.pause();videoPlayer.removeAttribute('src');videoPlayer.load();videoModal.hidden=true;document.body.classList.remove('modal-open');if(wantsMusic&&musicBooted)bgMusic.play().catch(()=>{})}
     videoClose.onclick=closeVideo;videoModal.onclick=e=>{if(e.target===videoModal)closeVideo()};document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!videoModal.hidden)closeVideo()});
-    const introScreen=document.getElementById('introScreen'),introVideo=document.getElementById('introVideo'),introSkip=document.getElementById('introSkip'),introProgress=document.getElementById('introProgress'),heroLoop=document.getElementById('heroLoop'),frameTransitionVideo=document.getElementById('frameTransitionVideo');let introDone=false;
-    function finishIntro(){if(introDone)return;introDone=true;introVideo.pause();scrollVideo.preload='auto';scrollVideo.load();let revealed=false;const revealGateway=()=>{if(revealed)return;revealed=true;introScreen.classList.add('leaving');setTimeout(()=>{introScreen.hidden=true;introScreen.classList.remove('leaving');armDeferredMusic();requestSceneUpdate()},850)};if(scrollVideo.readyState>=2)revealGateway();else{scrollVideo.addEventListener('loadeddata',revealGateway,{once:true});setTimeout(revealGateway,900)}}
+    const introScreen=document.getElementById('introScreen'),introVideo=document.getElementById('introVideo'),introSkip=document.getElementById('introSkip'),introProgress=document.getElementById('introProgress'),identityCover=document.getElementById('identityCover'),identityDrag=document.getElementById('identityDrag'),identityDragTrack=document.getElementById('identityDragTrack'),identityDragThumb=document.getElementById('identityDragThumb'),heroLoop=document.getElementById('heroLoop'),frameTransitionVideo=document.getElementById('frameTransitionVideo');let introDone=false,identityDone=false,identityDragActive=false,identityDragStart=0,identityDragProgress=0;
+    function paintIdentityDrag(progress){identityDragProgress=Math.max(0,Math.min(1,progress));const max=Math.max(identityDragTrack.clientWidth-identityDragThumb.offsetWidth-12,1);identityDrag.style.setProperty('--drag',(identityDragProgress*100).toFixed(2));identityDrag.style.setProperty('--drag-x',(identityDragProgress*max).toFixed(1)+'px')}
+    function finishIdentityCover(){if(identityDone)return;identityDone=true;identityDragActive=false;identityDrag.classList.remove('dragging');paintIdentityDrag(1);identityCover.classList.add('leaving');setTimeout(()=>{identityCover.hidden=true;identityCover.classList.remove('show','leaving');document.body.classList.remove('cover-active');armDeferredMusic();requestSceneUpdate()},650)}
+    function showIdentityCover(){identityDone=false;paintIdentityDrag(0);identityCover.hidden=false;document.body.classList.add('cover-active');requestAnimationFrame(()=>identityCover.classList.add('show'))}
+    function finishIntro(){if(introDone)return;introDone=true;introVideo.pause();scrollVideo.preload='auto';scrollVideo.load();let revealed=false;const revealGateway=()=>{if(revealed)return;revealed=true;showIdentityCover();introScreen.classList.add('leaving');setTimeout(()=>{introScreen.hidden=true;introScreen.classList.remove('leaving')},850)};if(scrollVideo.readyState>=2)revealGateway();else{scrollVideo.addEventListener('loadeddata',revealGateway,{once:true});setTimeout(revealGateway,900)}}
+    identityDrag.addEventListener('pointerdown',e=>{if(identityDone||e.button>0)return;identityDragActive=true;identityDragStart=e.clientX-identityDragProgress*Math.max(identityDragTrack.clientWidth-identityDragThumb.offsetWidth-12,1);identityDrag.classList.add('dragging');identityDrag.setPointerCapture(e.pointerId);e.preventDefault()});
+    identityDrag.addEventListener('pointermove',e=>{if(!identityDragActive)return;const max=Math.max(identityDragTrack.clientWidth-identityDragThumb.offsetWidth-12,1);paintIdentityDrag((e.clientX-identityDragStart)/max);if(identityDragProgress>=.94)finishIdentityCover()});
+    function releaseIdentityDrag(){if(!identityDragActive)return;identityDragActive=false;identityDrag.classList.remove('dragging');if(identityDragProgress<.94)paintIdentityDrag(0)}
+    identityDrag.addEventListener('pointerup',releaseIdentityDrag);identityDrag.addEventListener('pointercancel',releaseIdentityDrag);identityDrag.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();finishIdentityCover()}});addEventListener('resize',()=>paintIdentityDrag(identityDragProgress));
     introSkip.onclick=finishIntro;introVideo.onended=finishIntro;introVideo.onerror=finishIntro;introVideo.oncanplay=()=>introScreen.classList.add('ready');introVideo.onwaiting=()=>introScreen.classList.remove('ready');introVideo.onplaying=()=>introScreen.classList.add('ready');introVideo.ontimeupdate=()=>{if(introVideo.duration)introProgress.style.width=(introVideo.currentTime/introVideo.duration*100)+'%'};window.addEventListener('load',()=>introVideo.play().catch(()=>{introVideo.controls=true}));
     const floatChars=[...document.querySelectorAll('.float-char')],hero=document.querySelector('.hero'),aboutPanel=document.getElementById('aboutPanel'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;let motionTick=false;function updateScrollFloat(){const heroProgress=(scrollY-hero.offsetTop)/(innerHeight*.72),p=Math.min(Math.max(heroProgress,0),1);floatChars.forEach((ch,i)=>{const delay=i/(floatChars.length*2.2),q=Math.max(0,Math.min(1,(p-delay)/(1-delay)));ch.style.transform='translateY('+(q*170)+'%) scaleX('+(1-q*.1)+') scaleY('+(1+q*.2)+')';ch.style.opacity=1-q*.96});motionTick=false}if(!reducedMotion){addEventListener('scroll',()=>{if(!motionTick){motionTick=true;requestAnimationFrame(updateScrollFloat)}},{passive:true});updateScrollFloat();if(matchMedia('(pointer:fine)').matches){aboutPanel.addEventListener('pointermove',e=>{const r=aboutPanel.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;aboutPanel.style.setProperty('--panel-rx',(-y*3)+'deg');aboutPanel.style.setProperty('--panel-ry',(x*4)+'deg')});aboutPanel.addEventListener('pointerleave',()=>{aboutPanel.style.setProperty('--panel-rx','0deg');aboutPanel.style.setProperty('--panel-ry','0deg')})}}
     let heroLoopStarted=false;function startHeroLoop(){if(!heroLoopStarted){heroLoopStarted=true;heroLoop.preload='auto'}heroLoop.play().catch(()=>{})}function stopHeroLoop(){heroLoop.pause()}if('IntersectionObserver'in window){const heroMediaObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>entry.isIntersecting?startHeroLoop():stopHeroLoop())},{rootMargin:'35% 0px'});heroMediaObserver.observe(hero)}else startHeroLoop();
@@ -151,6 +254,12 @@
 
     let tiltFrame=0,tiltImage=null,tiltPoint=null;function resetTilt(image){if(!image)return;image.style.setProperty('--tilt-x','0deg');image.style.setProperty('--tilt-y','0deg');image.style.setProperty('--tilt-glow','0')}function paintTilt(){tiltFrame=0;if(!tiltImage||!tiltPoint)return;const r=tiltImage.getBoundingClientRect(),nx=clamp01((tiltPoint.x-r.left)/Math.max(r.width,1)),ny=clamp01((tiltPoint.y-r.top)/Math.max(r.height,1));tiltImage.style.setProperty('--tilt-x',((.5-ny)*5.5).toFixed(2)+'deg');tiltImage.style.setProperty('--tilt-y',((nx-.5)*7).toFixed(2)+'deg');tiltImage.style.setProperty('--tilt-light-x',(nx*100).toFixed(1)+'%');tiltImage.style.setProperty('--tilt-light-y',(ny*100).toFixed(1)+'%');tiltImage.style.setProperty('--tilt-glow','.72')}
     viewport.addEventListener('pointermove',e=>{if(mobileMedia||reducedMotion)return;const image=e.target.closest('.image');if(!image){resetTilt(tiltImage);tiltImage=null;return}if(tiltImage!==image){resetTilt(tiltImage);tiltImage=image}tiltPoint={x:e.clientX,y:e.clientY};if(!tiltFrame)tiltFrame=requestAnimationFrame(paintTilt)},{passive:true});viewport.addEventListener('pointerleave',()=>{resetTilt(tiltImage);tiltImage=null;tiltPoint=null;if(tiltFrame){cancelAnimationFrame(tiltFrame);tiltFrame=0}});
+
+    const contactHold=document.getElementById('contactHold');let holdFrame=0,holdStart=0,holdPointer=-1,holdOriginX=0,holdOriginY=0,holdFinished=false;
+    function paintContactHold(now){const progress=Math.min(1,(now-holdStart)/1000);contactHold.style.setProperty('--hold',(progress*100).toFixed(2));if(progress>=1){holdFinished=true;contactHold.classList.remove('holding');holdFrame=0;window.location.href=contactHold.href;return}holdFrame=requestAnimationFrame(paintContactHold)}
+    function cancelContactHold(){if(holdFrame)cancelAnimationFrame(holdFrame);holdFrame=0;holdPointer=-1;contactHold.classList.remove('holding');if(!holdFinished)contactHold.style.setProperty('--hold','0');holdFinished=false}
+    contactHold.addEventListener('pointerdown',e=>{if(e.button>0)return;cancelContactHold();holdPointer=e.pointerId;holdOriginX=e.clientX;holdOriginY=e.clientY;holdStart=performance.now();contactHold.classList.add('holding');contactHold.setPointerCapture(e.pointerId);holdFrame=requestAnimationFrame(paintContactHold);e.preventDefault()});
+    contactHold.addEventListener('pointermove',e=>{if(e.pointerId===holdPointer&&Math.hypot(e.clientX-holdOriginX,e.clientY-holdOriginY)>18)cancelContactHold()});contactHold.addEventListener('pointerup',cancelContactHold);contactHold.addEventListener('pointercancel',cancelContactHold);contactHold.addEventListener('click',e=>e.preventDefault());contactHold.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();window.location.href=contactHold.href}});
 
     let snapTimer=false,snapping=false,snapArmed=false,lastSnapY=scrollY;
     updateEffects();updateReelDepth();
