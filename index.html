@@ -65,6 +65,25 @@
     .cell.on{transform:scale(1)!important;opacity:1}
     .aboutgrid{will-change:auto!important}
   </style>
+  <style>
+    /* Lightweight chapter entrances: animate content, never the full section surface. */
+    body.motion-ready .motion-section .motion-item{transition:opacity .68s cubic-bezier(.2,.72,.2,1),transform .68s cubic-bezier(.2,.72,.2,1)}
+    body.motion-ready .motion-section:not(.is-visible) .motion-item{opacity:0;transform:translate3d(0,34px,0)}
+    body.motion-ready .motion-section.is-visible .motion-item{opacity:1;transform:translate3d(0,0,0)}
+    body.motion-ready .motion-section .motion-item:nth-child(2){transition-delay:.07s}
+    body.motion-ready .motion-section .motion-item:nth-child(3){transition-delay:.14s}
+    body.motion-ready .motion-section .motion-item:nth-child(4){transition-delay:.21s}
+    body.motion-ready .works .reel.motion-item{transition-property:opacity;transform:none!important}
+    @media (pointer:fine) and (prefers-reduced-motion:no-preference){
+      .cell .image{transform:perspective(1100px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateZ(0);transform-style:preserve-3d;transition:transform .16s ease-out,box-shadow .24s ease}
+      .cell.on .image:hover{box-shadow:0 24px 64px #000c,0 0 0 1px #d8ff3850}
+      .cell .image:before{content:"";position:absolute;z-index:6;inset:0;pointer-events:none;opacity:var(--tilt-glow,0);background:radial-gradient(circle at var(--tilt-light-x,50%) var(--tilt-light-y,50%),#ffffff38 0,transparent 34%);mix-blend-mode:screen;transition:opacity .2s ease}
+    }
+    @media(max-width:760px),(prefers-reduced-motion:reduce){
+      body.motion-ready .motion-section .motion-item{opacity:1!important;transform:none!important;transition:none!important}
+      .cell .image{transform:none!important}
+    }
+  </style>
 </head>
 <body class="gateway-active">
   <div class="scroll-video-bg" aria-hidden="true"><video id="scrollVideo" src="scroll-background-v32.mp4" muted playsinline preload="metadata"></video></div><div class="scroll-video-progress" aria-hidden="true"><i id="scrollVideoProgress"></i></div>
@@ -123,6 +142,14 @@
     function updateReelDepth(){strip.querySelectorAll('.cell').forEach((cell,index)=>cell.classList.toggle('on',index===active))}
     let reelTick=false;viewport.addEventListener('scroll',()=>{if(!reelTick){reelTick=true;requestAnimationFrame(()=>{updateReelDepth();reelTick=false})}},{passive:true});new MutationObserver(()=>requestAnimationFrame(()=>{viewport.scrollLeft=0;updateReelDepth()})).observe(strip,{childList:true});
     let lens,lensHost;viewport.addEventListener('pointermove',e=>{if(mobileMedia)return;const image=e.target.closest('.image');if(!image)return;if(lensHost!==image){if(lens)lens.remove();lens=document.createElement('span');lens.className='hover-lens';image.append(lens);lensHost=image}const r=image.getBoundingClientRect();image.style.setProperty('--lens-x',(e.clientX-r.left)+'px');image.style.setProperty('--lens-y',(e.clientY-r.top)+'px')});viewport.addEventListener('pointerleave',()=>{if(lens)lens.remove();lens=null;lensHost=null});
+
+    const motionSections=[worksSection,aboutSection,contactSection];
+    const motionItems=[...worksSection.children,...aboutSection.querySelectorAll(':scope > .head,.aboutgrid > h2,.aboutgrid > .bio,.aboutgrid > .services,:scope > .service-marquee'),...contactSection.children];
+    motionSections.forEach(section=>section.classList.add('motion-section'));motionItems.forEach(item=>item.classList.add('motion-item'));
+    if(!reducedMotion&&'IntersectionObserver'in window){document.body.classList.add('motion-ready');const revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}})},{threshold:.08,rootMargin:'0px 0px -8% 0px'});motionSections.forEach(section=>revealObserver.observe(section));setTimeout(()=>motionSections.forEach(section=>section.classList.add('is-visible')),1800)}else motionSections.forEach(section=>section.classList.add('is-visible'));
+
+    let tiltFrame=0,tiltImage=null,tiltPoint=null;function resetTilt(image){if(!image)return;image.style.setProperty('--tilt-x','0deg');image.style.setProperty('--tilt-y','0deg');image.style.setProperty('--tilt-glow','0')}function paintTilt(){tiltFrame=0;if(!tiltImage||!tiltPoint)return;const r=tiltImage.getBoundingClientRect(),nx=clamp01((tiltPoint.x-r.left)/Math.max(r.width,1)),ny=clamp01((tiltPoint.y-r.top)/Math.max(r.height,1));tiltImage.style.setProperty('--tilt-x',((.5-ny)*5.5).toFixed(2)+'deg');tiltImage.style.setProperty('--tilt-y',((nx-.5)*7).toFixed(2)+'deg');tiltImage.style.setProperty('--tilt-light-x',(nx*100).toFixed(1)+'%');tiltImage.style.setProperty('--tilt-light-y',(ny*100).toFixed(1)+'%');tiltImage.style.setProperty('--tilt-glow','.72')}
+    viewport.addEventListener('pointermove',e=>{if(mobileMedia||reducedMotion)return;const image=e.target.closest('.image');if(!image){resetTilt(tiltImage);tiltImage=null;return}if(tiltImage!==image){resetTilt(tiltImage);tiltImage=image}tiltPoint={x:e.clientX,y:e.clientY};if(!tiltFrame)tiltFrame=requestAnimationFrame(paintTilt)},{passive:true});viewport.addEventListener('pointerleave',()=>{resetTilt(tiltImage);tiltImage=null;tiltPoint=null;if(tiltFrame){cancelAnimationFrame(tiltFrame);tiltFrame=0}});
 
     let snapTimer=false,snapping=false,snapArmed=false,lastSnapY=scrollY;
     updateEffects();updateReelDepth();
